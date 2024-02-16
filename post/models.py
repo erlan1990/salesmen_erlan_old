@@ -10,15 +10,15 @@ class Category(models.Model):
         return self.name
 
 LOCATION_CHOICES = {
-    'BISHKEK': 'Бишкек',
-    'TOKMOK': 'Токмок',
-    'BOSTERY': 'Бостери',
-    'BALYKCHY': 'Балыкчы'
+    ('BISHKEK', 'Бишкек'),
+    ('TOKMOK', 'Токмок'),
+    ('BOSTERY', 'Бостери'),
+    ('BALYKCHY', 'Балыкчы')
 }
 
 CURRENCY_CHOICES = {
-        'DOLLAR': 'Доллар USA',
-        'SOM': 'Сом'
+        ('DOLLAR', 'Доллар USA'),
+        ('SOM', 'Сом')
     }
 
 
@@ -26,41 +26,41 @@ CURRENCY_CHOICES = {
 class Auto(models.Model):
     
     TYPE_OF_BODY_CHOICES = {
-        'SEDAN': 'Седан',
-        'HATCHBACK': 'Хетчбек',
-        'UNIVERSAL': 'Универсал',
-        'CROSSOVER': 'Кроссовер',
-        'SUV': 'Внедорожник',
-        'CABRIOLET': 'Кабриолет'
+        ('SEDAN', 'Седан'),
+        ('HATCHBACK', 'Хетчбек'),
+        ('UNIVERSAL', 'Универсал'),
+        ('CROSSOVER', 'Кроссовер'),
+        ('SUV', 'Внедорожник'),
+        ('CABRIOLET', 'Кабриолет')
     }
 
     TRANSMISSION_CHOICES = {
-        'MECHANICS': 'Механика',
-        'AUTOMAT': 'Автомат'
+        ('MECHANICS', 'Механика'),
+        ('AUTOMAT', 'Автомат')
     }
 
     WHEEL_CHOICES = {
-        'LEFT': 'Левый',
-        'RIGTH': 'Правый',
+        ('LEFT', 'Левый'),
+        ('RIGTH', 'Правый'),
     }
 
     CONDITIONS_CHOICES = {
-        'GOOD': 'Хорошее',
-        'EXCELLENT': 'Идеальное',
-        'EMERGENCY': 'Не на ходу',
-        'NEW': 'Новое'
+        ('GOOD', 'Хорошее'),
+        ('EXCELLENT', 'Идеальное'),
+        ('EMERGENCY', 'Не на ходу'),
+        ('NEW', 'Новое')
     }
 
 
     AVAILABILITY_CHOICES = {
-        'IN_STOCK': 'В Наличии',
-        'TO_ORDER': 'На заказ',
-        'ON_THE_WAY':'В пути'
+        ('IN_STOCK', 'В Наличии'),
+        ('TO_ORDER', 'На заказ'),
+        ('ON_THE_WAY', 'В пути')
     }
 
     CAR_EXCHANGE_CHOICES = {
-        'YES': 'Да',
-        'NO': 'Нет'
+        ('YES', 'Да'),
+        ('NO', 'Нет')
     }
 
 
@@ -88,32 +88,32 @@ class Auto(models.Model):
 class House(models.Model):
 
     NUMBER_OF_ROOMS = {
-        '1 ROOM': '1 КОМНАТА',
-        '2 ROOMS': '2 КОМНАТЫ',
-        '3 ROOMS': '3 КОМНАТЫ',
-        '4 ROOMS': '4 КОМНАТЫ',
-        '5 ROOMS': '5 КОМНАТЫ',
-        '6 ROOMS': '6 КОМНАТЫ',
-        '7 ROOMS': '7 КОМНАТЫ',
+        ('1 ROOM', '1 КОМНАТА'),
+        ('2 ROOMS', '2 КОМНАТЫ'),
+        ('3 ROOMS', '3 КОМНАТЫ'),
+        ('4 ROOMS', '4 КОМНАТЫ'),
+        ('5 ROOMS', '5 КОМНАТЫ'),
+        ('6 ROOMS', '6 КОМНАТЫ'),
+        ('7 ROOMS', '7 КОМНАТЫ'),
     }
 
     YEAR_OF_BUILDINGS = {
-        'UNTILL 19650': 'До 1950',
-        '1950-1959': '1950-1959',
-        '1960-1969': '1960-1969',
-        '1970-1979': '1970-1979',
-        '1980-1989': '1980-1989',
-        '1990-1999': '1990-1999',
-        '2000-2009': '2000:2009',
-        '2010-2019': '2010-2019',
-        '2020-current': '2020-наст.время'
+        ('UNTILL 19650', 'До 1950'),
+        ('1950-1959', '1950-1959'),
+        ('1960-1969', '1960-1969'),
+        ('1970-1979', '1970-1979'),
+        ('1980-1989', '1980-1989'),
+        ('1990-1999', '1990-1999'),
+        ('2000-2009', '2000:2009'),
+        ('2010-2019', '2010-2019'),
+        ('2020-current', '2020-наст.время')
 
     }
 
     TYPE_OF_HOUSE_CHOICES = {
-        'APPARTMENT': 'КВАРТИРА',
-        'COMMERCIAL_ESTATE': 'КОММЕРЧЕСКАЯ НЕДВИЖИМОСТЬ',
-        'PRIVATE HOUSE': 'ЧАСТНЫЙ ДОМ'
+        ('APPARTMENT', 'КВАРТИРА'),
+        ('COMMERCIAL_ESTATE', 'КОММЕРЧЕСКАЯ НЕДВИЖИМОСТЬ'),
+        ('PRIVATE HOUSE', 'ЧАСТНЫЙ ДОМ')
     }
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

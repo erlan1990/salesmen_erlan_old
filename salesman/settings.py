@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = 'account.User'
 
 
 # Application definition
@@ -39,9 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #lib
     'rest_framework',
+    'drf_yasg',
+    'django_filters',
+    'rest_framework.authtoken',
     #app
     'post',
     'rating',
+    'account',
     # 'user',
 ]
 
@@ -128,6 +136,51 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import os
+
 MEDIA_URL = '/auto_photos/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'], 
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 4,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+}
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'eraline1990@gmail.com'
+EMAIL_HOST_PASSWORD = 'eqqcvyersteytzgj'
+
+
+
+
+
+
+# Уровень логирования: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'DEBUG')
+
+# Создание папки log внутри вашего проекта, если ее нет
+LOGGING_DIR = os.path.join(BASE_DIR, 'log')
+if not os.path.exists(LOGGING_DIR):
+    os.makedirs(LOGGING_DIR)
+
+# Путь к файлу лога
+LOG_FILE_PATH = os.path.join(LOGGING_DIR, 'app.log')
+
+# Настройка логгера
+logging.basicConfig(
+    level=LOG_LEVEL,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE_PATH),
+        logging.StreamHandler(),
+    ]
+)
